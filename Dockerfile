@@ -9,9 +9,9 @@ RUN apt update && apt install -y \
 
 WORKDIR /opt/toolchains
 
-# Download and extract public LLVM 16 toolchain
-RUN wget https://releases.linaro.org/components/toolchain/clang/16.0.2/linux-x86_64/clang+llvm-16.0.2-x86_64-linux-gnu.tar.xz -O clang.tar.xz && \
-    mkdir clang && tar -xf clang.tar.xz -C clang --strip-components=1
+# Download and extract real AOSP clang r416183b tar.gz (not a webpage)
+RUN wget https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/tags/android-11.0.0_r17/clang-r416183b.tar.gz -O clang.tar.gz && \
+    mkdir clang && tar -xzf clang.tar.gz -C clang
 
 # Clone AOSP GCC toolchains
 RUN mkdir -p gcc64 && \
