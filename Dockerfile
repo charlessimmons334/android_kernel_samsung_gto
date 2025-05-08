@@ -9,9 +9,9 @@ RUN apt update && apt install -y \
 
 WORKDIR /opt/toolchains
 
-# Download and extract real AOSP clang r416183b tar.gz (not a webpage)
-RUN wget https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/tags/android-11.0.0_r17/clang-r416183b.tar.gz -O clang.tar.gz && \
-    mkdir clang && tar -xzf clang.tar.gz -C clang
+# Clone AOSP clang and extract only clang-r416183b
+RUN git clone --depth=1 https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86 clang && \
+    mv clang/clang-r416183b clang && rm -rf clang/.git
 
 # Clone AOSP GCC toolchains
 RUN mkdir -p gcc64 && \
